@@ -1,0 +1,32 @@
+syntax = "proto3";
+package notifypb;
+
+
+import "proto/predict_service.proto" ;
+
+message Notify {
+    string id =1 ;
+    string timestamp = 2;
+    int64  card_no  = 3;
+    string message  = 4;
+}
+message CreateNotifyRequest {
+    predictpb.Predict predict =1 ;
+}
+message CreateNotifyResponse {
+    Notify notify =1 ;
+}
+message ListNotificationRequest{
+
+}
+message ListNotificationResponse{
+    Notify notify=1 ;
+
+}
+service NotifyService {
+    //Create
+    rpc CreateNotification (CreateNotifyRequest) returns (CreateNotifyResponse);
+        
+    //List
+    rpc ListNotification (ListNotificationRequest) returns (stream ListNotificationResponse);
+}

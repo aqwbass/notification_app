@@ -1,0 +1,19 @@
+syntax = "proto3";
+package predictpb;
+import "proto/transection_service.proto" ;
+
+message Predict {
+    int64 card_no =1;
+    string message=2;
+    float accuracy=3;
+}
+message PredictRequest {
+    transectionpb.Transection transection = 1;
+}
+message PredictResponse {
+    Predict predict = 1 ;
+}
+service PredictService {
+    //function Predict
+    rpc MethodName (PredictRequest) returns (PredictResponse);
+}

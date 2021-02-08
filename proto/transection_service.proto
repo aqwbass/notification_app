@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+
+package transectionpb;
+
+
+
+message Transection {
+    string date = 1;
+    string time = 2;
+    int64 card_no = 3;
+    int32 merchant_location = 4;
+    int32 merchant_state = 5;
+    int64 trans_code = 6;
+    string trans = 7;
+    int64 amt_1 = 8;
+    string amt_2= 9;
+    int64 fr_acct = 10 ;
+    int64 to_acct = 11 ;
+    string resp = 12 ;
+    int32 typ = 13;
+    int64 sequen =14;
+    int64 old_sequen=15;
+    int32 tot_fee=16;
+    int32 acq_fee=17;
+    int32 fee=18;
+    int32 comm=19;
+    Bank_list card_fr=20;
+    Bank_list card_to=21;
+    Bank_list atm=22;
+    string atm_id=23;
+    string term=24;
+    string taxid = 25;
+    string ref1 = 26;
+    string ref2 = 27;
+    string bill_counter = 28;
+    int64 sw_trace =29;
+    int32 act_fr_reg=30;
+    int32 term_reg =31;
+    string term_country = 32;
+    string currency = 33;
+    double orig_amt = 34;
+    int64 branch_code = 35;
+    int64 reversal_rc = 36;
+    int64 pos_entry_mode = 37;
+    string t_term_owner_name = 38;
+
+}
+
+enum Bank_list {
+    UNKNOWN = 0;
+    TMB = 1;
+    SCB = 2;
+    BBL = 3;
+    UOBT = 4;
+    TBNK = 5;
+    CMBT = 6;
+    BAAC = 7;
+    KTB = 8;
+    KKB = 9;
+    KKBA = 10 ;
+    CUPA = 11 ;
+    KBNK = 12 ;
+}
+message ListTransectionRequest{
+
+} 
+message ListTransectionResponse{
+    Transection transection = 1;
+}
+message ReadTransectionRequest{
+    int64 card_no =1;
+} 
+message ReadTransectionResponse{
+    Transection transection=1;
+}
+message CreateTransectionRequest{
+    Transection transection=1; 
+}
+message CreateTransectionResponse{
+    Transection transection=1;
+}
+service TransectionService {
+    rpc ListTransection (ListTransectionRequest) returns (stream ListTransectionResponse);
+   
+
+    rpc ReadTransection (ReadTransectionRequest) returns (ReadTransectionResponse);
+    
+
+    rpc CreateTransection (CreateTransectionRequest) returns (CreateTransectionResponse);
+    
+}

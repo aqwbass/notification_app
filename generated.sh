@@ -1,0 +1,1 @@
+protoc -I. proto/*.proto --dart_out=grpc:lib/servic
